@@ -1,0 +1,4 @@
+applications:
+- name: appicosibmcloudDemo
+  random-route: true
+  memory: 128M

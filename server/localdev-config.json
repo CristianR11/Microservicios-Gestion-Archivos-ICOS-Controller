@@ -1,0 +1,15 @@
+{
+  "cos_original_bucket": "bucketdemo",
+  "cos_normalized_bucket": "bucketdemo",
+  "cos_api_key": "8lvhV3tIGbqW0c4SKPTVPrVtG4ns0-x6YTUJyq9RU-hr",
+  "cos_endpoint": "s3.us-south.cloud-object-storage.appdomain.cloud",
+  "iam_apikey_description": "Auto-generated for key e258174a-305e-4dbb-9bb9-14dfb790fc31",
+  "iam_apikey_name": "Credenciales de servicio-1",
+  "iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+  "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/7c3c53c1245d449bb3791b9611571ce3::serviceid:ServiceId-c04cc1dc-c6fe-45cc-97e1-cd9b0193b9a8",
+  "cos_service_instance_id": "crn:v1:bluemix:public:cloud-object-storage:global:a/7c3c53c1245d449bb3791b9611571ce3:a51c5e3f-01a9-40d7-9a68-267e0cf48a0e::",
+  "access_key_id": "1363961ee950445c8c8c97a8683009d4",
+  "secret_access_key": "9f59697a79c43b0566e0cc3adab02f47721d506f6500efe8"
+}
+
+    
