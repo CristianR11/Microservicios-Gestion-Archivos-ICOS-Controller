@@ -22,7 +22,7 @@ var config = {
 var s3 = new AWS.S3(config);
 
 module.exports = {
-async  fromData(params,res) {
+    async  fromData(params,res) {
     var descriptioninput,namefile = [''];
     var data = multer().array('file',20);
     var j = 0;
@@ -42,7 +42,7 @@ async  fromData(params,res) {
             descripcion: descriptioninput,
             namefile: namefile
         }
-},
+    },
 
     uploadOnBucket(namebucket,req,res){
     const carga = multer({
@@ -117,5 +117,24 @@ async  fromData(params,res) {
         .catch((e) => {
             console.error(`ERROR: ${e.code} - ${e.message}\n`);
         });
+    },
+
+    listDocs: function(bucketname){
+        return s3.listObjects({Bucket: `${bucketname}`}).promise()
+        .then((data) =>{
+            console.log('list Objects completed');
+            return data.Contents;
+        })
+        .catch((e) => {
+            console.error(`ERROR: ${e.code} - ${e.message}\n`);
+        })
+    },
+
+    deleteBucket: function(bucketname){
+    console.log(`Eliminando bucket: ${bucketname}`);
+      s3.deleteBucket({Bucket: `${bucketname}`}, function(err, data) {
+        if (err) console.log(err, err.stack); // an error occurred
+        else     console.log('Bucket deleted');           // successful response
+      });
     }
 }

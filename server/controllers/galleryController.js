@@ -41,18 +41,9 @@ var galleryController = function(title) {
         res.json(`${data}`);
     }
 
-  /*  function uploadFile(req,res){
-        s3function.fromData(req)
-        .then(function(description){
-            console.log(description);
-            s3function.s3uploadFile(description,req);
-        })
-    }
-    */
-
    function uploadFile(req,res){
     s3function.s3uploadFile(description,req);
-}
+    }
 
     var upload = multer({
         storage: multerS3({
@@ -205,8 +196,7 @@ var galleryController = function(title) {
         .catch(function (err) {
             // Request failed due to technical reasons...
         });
-        //nameproject = req.body.name.toLowerCase();
-        //nameproject = nameproject.replace(/ /g, '');
+
     }
     
     var validate_login = function(req,res){
@@ -218,8 +208,26 @@ var galleryController = function(title) {
         request.post({url:'http://localhost:4000/New-User', form:{mail: req.body.mail}}).promise();
     }
 
-    var deleteProject = function(req, res){
-        console.log('llego la solicitud');
+    var deleteProject = async function(req, res){
+        request.post({url:'http://localhost:4000/Del-Project', form:{id: req.params.id}}).promise()
+        .then(async function (body) {
+            console.log(req);
+            var data = await s3function.listDocs(`project${req.params.id}`);
+            for(var i=0; i < data.length; i++){
+                console.log(data[i].Key)
+                s3function.deleteItem(`project${req.params.id}`, `${data[i].Key}`);
+            }
+            var data2 = await s3function.listDocs(`trash${req.params.id}`);
+            for(var i=0; i < data2.length; i++){
+                console.log(data2[i].Key)
+                s3function.deleteItem(`trash${req.params.id}`, `${data2[i].Key}`);
+            }
+            s3function.deleteBucket(`project${req.params.id}`);
+            s3function.deleteBucket(`trash${req.params.id}`);
+        })
+        .catch(function (err) {
+            // Request failed due to technical reasons...
+        });
     }
 
     return {
